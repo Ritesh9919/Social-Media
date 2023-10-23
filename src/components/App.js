@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {getPosts} from '../api';
 import { Home } from '../pages';
-import { Loder } from './Loder';
+import { Loader } from './Loader';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
   },[])
 
  if(loading) {
-   return <Loder/>
+   return <Loader/>
  }
 
   return (
