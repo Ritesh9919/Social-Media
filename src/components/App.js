@@ -8,15 +8,14 @@ function App() {
   useEffect(()=> {
     async function fetchPosts() {
      const response = await getPosts();
-     const data = response.data.posts;
-    setPosts(data);
+    setPosts(response.data.posts);
     }
     fetchPosts();
   },[])
   return (
     <div className="App">
       
-      <Home/>
+      <Home posts={posts}/>
     </div>
   );
 }
