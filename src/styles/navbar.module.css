@@ -15,6 +15,7 @@
   }
   .nav .userDp {
     height: 40px;
+    border-radius: 50%;
   }
   .nav .user {
     display: flex;

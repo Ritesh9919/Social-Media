@@ -16,7 +16,7 @@ const Navbar = () => {
           <div className={styles.user}>
             <a href="/">
               <img
-                src="https://tse4.explicit.bing.net/th?id=OIP.audMX4ZGbvT2_GJTx2c4GgHaHw&pid=Api&P=0&h=180"
+                src="https://tse1.mm.bing.net/th?id=OIP.nczpMSa69aDJWYGi0tKqggHaHa&pid=Api&P=0&h=180"
                 alt=""
                 className={styles.userDp}
               />

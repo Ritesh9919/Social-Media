@@ -1,6 +1,8 @@
+import propsTypes from 'prop-types';
 import styles from '../styles/home.module.css';
 
-function Comment() {
+
+function Comment({comment}) {
   return (
     <div className={styles.postCommentsItem}>
       <div className={styles.postCommentHeader}>
@@ -9,9 +11,13 @@ function Comment() {
         <span className={styles.postCommentLikes}>22</span>
       </div>
 
-      <div className={styles.postCommentContent}>Random comment</div>
+      <div className={styles.postCommentContent}>{comment.content}</div>
     </div>
   );
+}
+
+Comment.prototype = {
+  comment:propsTypes.object.isRequired
 }
 
 export default Comment;
