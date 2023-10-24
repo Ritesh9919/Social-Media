@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {getPosts} from '../api';
-import { Home } from '../pages';
+import { Home, Login } from '../pages';
 import { Loader } from './Loader';
 import Navbar from './Navbar';
+
+
+
+
 
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  
   useEffect(()=> {
     async function fetchPosts() {
      const response = await getPosts();
@@ -25,8 +31,17 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
       <Navbar/>
-      <Home posts={posts}/>
+      <Routes>
+        <Route path="/" element={<Home posts={posts} />}/>
+        <Route path="/login" element={<Login />}/>
+        
+
+      </Routes>
+      </Router>
+
+      
     </div>
   );
 }
