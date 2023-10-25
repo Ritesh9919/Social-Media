@@ -1,13 +1,14 @@
 import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import styles from '../styles/login.module.css';
+import { login } from '../api';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoggingIn(true);
     if (!email || !password) {
@@ -22,6 +23,32 @@ function Login() {
         theme: 'colored',
       });
     }
+    const response = await login(email, password);
+    console.log(response);
+    if (response.success) {
+      return toast.success('Login Successfully!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    } else {
+      return toast.error(response.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+    setLoggingIn(false);
   };
 
   return (
@@ -46,8 +73,10 @@ function Login() {
         />
       </div>
 
-      <div className={styles.field} aria-disabled={loggingIn}>
-        <button>{loggingIn ? 'Logging In...' : 'Log In'}</button>
+      <div className={styles.field}>
+        <button disabled={loggingIn}>
+          {loggingIn ? 'Logging In...' : 'Log In'}
+        </button>
       </div>
     </form>
   );
