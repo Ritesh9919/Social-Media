@@ -25,7 +25,7 @@ const Navbar = () => {
                 className={styles.userDp}
               />
             </a>
-            <span>Aakash</span>
+            <span>{auth.user.name}</span>
           </div>
         )}
 
@@ -44,7 +44,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <a href="/">Register</a>
+                  <Link to="/register">Register</Link>
                 </li>
               </>
             )}
