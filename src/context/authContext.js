@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import { usePrivideAuth } from '../hooks/useProvideAuth';
+import { useProvideAuth } from '../hooks/useProvideAuth';
 
 const initialValue = {
     user:null,
@@ -13,7 +13,7 @@ export const authContext = createContext(initialValue);
 
 
 const AuthProvider = ({children}) => {
-    const auth = usePrivideAuth();
+    const auth = useProvideAuth();
     return (
         <authContext.Provider value={auth}>
             {children}
