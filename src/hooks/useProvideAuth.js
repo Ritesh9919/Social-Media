@@ -1,15 +1,26 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { authContext } from '../context/authContext';
 import { login as userLogin } from '../api';
-import { LOCALSTORAGE_TOKEN_KEY, removeItemFromLocalStorage, setItemInLocalStorage } from '../utils';
+import { LOCALSTORAGE_TOKEN_KEY, getItemFromLocalStorage, removeItemFromLocalStorage, setItemInLocalStorage } from '../utils';
+import {jwtDecode} from 'jwt-decode';
 
-export const useAth = () => {
+export const useAuth = () => {
   return useContext(authContext);
 };
 
 export const useProvideAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+
+  useEffect(()=> {
+    const userToken = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
+    if(userToken) {
+      const user = jwtDecode(userToken);
+      setUser(user);
+    }
+    setLoading(false);
+  },[]);
 
   const login = async (email, password) => {
     const response = await userLogin(email, password);

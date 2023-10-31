@@ -1,13 +1,13 @@
 import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import styles from '../styles/login.module.css';
-import { useAth } from '../hooks/useProvideAuth';
+import { useAuth } from '../hooks/useProvideAuth';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
-  const auth = useAth();
+  const auth = useAuth();
   console.log(auth);
 
   const handleSubmit = async (e) => {
