@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
 import { ToastContainer, toast } from 'react-toastify';
@@ -33,6 +33,11 @@ function Signup() {
     }
     setSignupIn(false);
   };
+
+  if(auth.user) {
+    return <Navigate to={"/"}/>
+   }
+ 
 
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>

@@ -2,7 +2,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,redirect,Navigate} from 'react-router-dom';
 import { toastConfig } from '../utils/index';
 
 function Login() {
@@ -29,6 +29,10 @@ function Login() {
     }
     setLoggingIn(false);
   };
+
+  if(auth.user) {
+   return <Navigate to={'/'}/>
+  }
 
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
