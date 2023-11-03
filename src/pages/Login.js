@@ -2,7 +2,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { toastConfig } from '../utils/index';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -10,49 +11,21 @@ function Login() {
   const [loggingIn, setLoggingIn] = useState(false);
   const auth = useAuth();
   const navigate = useNavigate();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoggingIn(true);
     if (!email || !password) {
-      return toast.error('Please enter both email and password', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      return toast.error('Please enter both email and password', toastConfig);
     }
-    
+
     const response = await auth.login(email, password);
     console.log(response);
     if (response.success) {
       navigate('/');
-      return toast.success('Login Successfully!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      return toast.success('Login Successfully!', toastConfig);
     } else {
-      return toast.error(response.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      return toast.error(response.message, toastConfig);
     }
     setLoggingIn(false);
   };

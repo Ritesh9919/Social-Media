@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
 import { ToastContainer, toast } from 'react-toastify';
+import {toastConfig} from '../utils/index';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -19,43 +20,16 @@ function Signup() {
     e.preventDefault();
     setSignupIn(true);
     if (!name || !email || !password || !confirmPassword) {
-      return toast.error('Please enter all fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      return toast.error('Please enter all fields', toastConfig);
     }
 
     const response = await auth.signup(name, email, password, confirmPassword);
 
     if (response.success) {
       navigate('/login');
-      return toast.success('signup Successfully!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      return toast.success('signup Successfully!', toastConfig);
     } else {
-      return toast.error(response.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      return toast.error(response.message, toastConfig);
     }
     setSignupIn(false);
   };
