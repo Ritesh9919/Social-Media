@@ -42,3 +42,10 @@
     color:gray;
     margin-bottom: 5px;
 }
+
+.btnGroup{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
