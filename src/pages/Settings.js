@@ -3,6 +3,7 @@ import { useAuth } from '../hooks/useProvideAuth';
 import styles from '../styles/settings.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { toastConfig } from '../utils/index';
+import { Navigate } from 'react-router-dom';
 
 function Settings() {
   const auth = useAuth();
@@ -48,6 +49,10 @@ function Settings() {
 
     setSavingForm(false);
   };
+
+  if(!auth.user) {
+    return <Navigate to={"/login"}/>
+  }
 
   return (
     <div className={styles.settings}>

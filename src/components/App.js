@@ -1,10 +1,30 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import { getPosts } from '../api';
 import { Home, Login, Signup, Settings } from '../pages';
 import { Loader } from './Loader';
 import Navbar from './Navbar';
 import { useAuth } from '../hooks/useProvideAuth';
+
+// function PrivateRoute ({ children, ...rest })  {
+//   const auth = useAuth();
+//   return (
+//     <Route
+//       {...rest}
+//       render={() => {
+//         if (auth.user) {
+//           return children;
+//         }
+//         return <Navigate to={'/login'} />
+//       }}
+//     />
+//   );
+// };
 
 function App() {
   const auth = useAuth();
@@ -21,7 +41,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/setting" element={<Settings />} />
+          <Route path="/setting" element={<Settings />}/>
+          
+          
         </Routes>
       </Router>
     </div>
