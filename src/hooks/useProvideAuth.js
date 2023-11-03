@@ -4,6 +4,7 @@ import { login as userLogin, signup as userSignup } from '../api';
 import { LOCALSTORAGE_TOKEN_KEY, getItemFromLocalStorage, removeItemFromLocalStorage, setItemInLocalStorage } from '../utils';
 import {jwtDecode} from 'jwt-decode';
 
+
 export const useAuth = () => {
   return useContext(authContext);
 };
@@ -11,6 +12,7 @@ export const useAuth = () => {
 export const useProvideAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  
 
 
   useEffect(()=> {
@@ -56,6 +58,8 @@ export const useProvideAuth = () => {
   const logout = () => {
     setUser(null);
     removeItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
+    
+
   };
   return {
     user,

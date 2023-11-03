@@ -1,7 +1,8 @@
 import Home from '../pages/Home';
 import Login from './Login';
-import Register from './Register';
+import Signup from './Signup';
+import Settings from './Settings';
 
 export {
-    Home,Login,Register
+    Home,Login,Signup,Settings
 }

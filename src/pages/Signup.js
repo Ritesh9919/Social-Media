@@ -1,22 +1,25 @@
-import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
-import {useNavigate} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
-function Login() {
+function Signup() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loggingIn, setLoggingIn] = useState(false);
-  const auth = useAuth();
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [signupIn, setSignupIn] = useState(false);
   const navigate = useNavigate();
-  
+
+  const auth = useAuth();
+  console.log(auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoggingIn(true);
-    if (!email || !password) {
-      return toast.error('Please enter both email and password', {
+    setSignupIn(true);
+    if (!name || !email || !password || !confirmPassword) {
+      return toast.error('Please enter all fields', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -27,12 +30,12 @@ function Login() {
         theme: 'colored',
       });
     }
-    
-    const response = await auth.login(email, password);
-    console.log(response);
+
+    const response = await auth.signup(name, email, password, confirmPassword);
+
     if (response.success) {
-      navigate('/');
-      return toast.success('Login Successfully!', {
+      navigate('/login');
+      return toast.success('signup Successfully!', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -54,12 +57,21 @@ function Login() {
         theme: 'colored',
       });
     }
-    setLoggingIn(false);
+    setSignupIn(false);
   };
 
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
-      <span className={styles.loginSignupHeader}>Log In</span>
+      <span className={styles.loginSignupHeader}>Register</span>
+
+      <div className={styles.field}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
 
       <div className={styles.field}>
         <input
@@ -80,12 +92,21 @@ function Login() {
       </div>
 
       <div className={styles.field}>
-        <button disabled={loggingIn}>
-          {loggingIn ? 'Logging In...' : 'Log In'}
+        <input
+          type="password"
+          placeholder="Conform Paasword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.field}>
+        <button disabled={signupIn}>
+          {signupIn ? 'Signning In...' : 'Sign Up'}
         </button>
       </div>
     </form>
   );
 }
 
-export default Login;
+export default Signup;

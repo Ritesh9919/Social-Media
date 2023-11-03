@@ -8,6 +8,7 @@ import { Loader } from '../components/Loader';
 function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(()=> {
     async function fetchPosts() {

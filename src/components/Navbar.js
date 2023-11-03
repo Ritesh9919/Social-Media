@@ -18,13 +18,13 @@ const Navbar = () => {
       <div className={styles.rightNav}>
         {auth.user && (
           <div className={styles.user}>
-            <a href="/">
+            <Link to="/setting">
               <img
                 src="https://tse1.mm.bing.net/th?id=OIP.nczpMSa69aDJWYGi0tKqggHaHa&pid=Api&P=0&h=180"
                 alt=""
                 className={styles.userDp}
               />
-            </a>
+            </Link>
             <span>{auth.user.name}</span>
           </div>
         )}
@@ -44,7 +44,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <Link to="/register">Register</Link>
+                  <Link to="/signup">Register</Link>
                 </li>
               </>
             )}
