@@ -2,7 +2,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
-import { useNavigate,redirect,Navigate} from 'react-router-dom';
+import {redirect,Navigate} from 'react-router-dom';
 import { toastConfig } from '../utils/index';
 
 function Login() {
@@ -10,7 +10,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
   const auth = useAuth();
-  const navigate = useNavigate();
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ function Login() {
     const response = await auth.login(email, password);
     console.log(response);
     if (response.success) {
-      navigate('/');
+      redirect('/');
       return toast.success('Login Successfully!', toastConfig);
     } else {
       return toast.error(response.message, toastConfig);

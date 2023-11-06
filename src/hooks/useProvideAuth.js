@@ -3,6 +3,8 @@ import { authContext } from '../context/authContext';
 import { login as userLogin, signup as userSignup, editProfile } from '../api';
 import { LOCALSTORAGE_TOKEN_KEY, getItemFromLocalStorage, removeItemFromLocalStorage, setItemInLocalStorage } from '../utils';
 import {jwtDecode} from 'jwt-decode';
+import {toast} from 'react-toastify';
+import {toastConfig} from '../utils/index';
 
 
 export const useAuth = () => {
@@ -77,6 +79,7 @@ export const useProvideAuth = () => {
   const logout = () => {
     setUser(null);
     removeItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
+    return toast.success('Logout successfully!', toastConfig);
     
 
   };

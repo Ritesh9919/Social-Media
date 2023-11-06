@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, redirect, useNavigate } from 'react-router-dom';
+import { Navigate, redirect } from 'react-router-dom';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,7 +11,7 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [signupIn, setSignupIn] = useState(false);
-  const navigate = useNavigate();
+  
 
   const auth = useAuth();
   console.log(auth);
@@ -26,7 +26,7 @@ function Signup() {
     const response = await auth.signup(name, email, password, confirmPassword);
 
     if (response.success) {
-      navigate('/login');
+      redirect('/login');
       return toast.success('signup Successfully!', toastConfig);
     } else {
       return toast.error(response.message, toastConfig);
