@@ -74,3 +74,10 @@ export const editProfile = (userId, name, password, confirmPassword)=> {
   })
 }
 
+
+export const fetchUserInfo = (userId) => {
+  return customFetch(API_URLS.userInfo(userId), {
+    method:'GET'
+  })
+}
+
