@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { authContext } from '../context/authContext';
-import { login as userLogin, signup as userSignup, editProfile } from '../api';
+import { login as userLogin, signup as userSignup, editProfile, fetchUserFriends } from '../api';
 import { LOCALSTORAGE_TOKEN_KEY, getItemFromLocalStorage, removeItemFromLocalStorage, setItemInLocalStorage } from '../utils';
 import {jwtDecode} from 'jwt-decode';
 import {toast} from 'react-toastify';
@@ -18,12 +18,24 @@ export const useProvideAuth = () => {
 
 
   useEffect(()=> {
+    const getUser = async()=> {
     const userToken = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
     if(userToken) {
       const user = jwtDecode(userToken);
-      setUser(user);
+      const response = await fetchUserFriends();
+      let friends = [];
+      if(response.success) {
+        console.log(response.data.friends)
+        friends = response.data.friends;
+      }
+      setUser({
+        ...user,
+        friends
+      });
     }
     setLoading(false);
+  }
+  getUser()
   },[]);
 
   const login = async (email, password) => {
@@ -83,12 +95,28 @@ export const useProvideAuth = () => {
     
 
   };
+
+  const updateUserFriend = (addFriend, friend)=> {
+    if(addFriend) {
+      setUser({
+        ...user,
+        friend:[...user.friends, friend]
+      })
+    }
+    const newFriend = user.friends.filter((f)=> f.to_user._id !== friend.to_user._id);
+    setUser({
+      ...user,
+      friends:newFriend
+    })
+  }
+
   return {
     user,
     loading,
     login,
     signup,
     logout,
-    updateUser
+    updateUser,
+    updateUserFriend
   };
 };

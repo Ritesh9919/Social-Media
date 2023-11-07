@@ -7,7 +7,8 @@ const initialValue = {
     logout:()=> {},
     signup:()=>{},
     loading:true,
-    updateUser:()=>{}
+    updateUser:()=>{},
+    updateUserFriend:()=>{}
 }
 export const authContext = createContext(initialValue);
 
