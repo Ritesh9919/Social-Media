@@ -1,29 +1,18 @@
 import propTypes from 'prop-types';
-import { useState, useEffect } from 'react';
-import { getPosts } from '../api';
 import styles from '../styles/home.module.css';
 import Comment from '../components/Comment';
 import { Loader } from '../components/Loader';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useProvideAuth';
 import { FriendsList, CreatePost } from '../components';
+import { usePosts } from '../hooks/useProvidePost';
 
 function Home() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const post = usePosts();
+  const {posts, loading} = post.posts;
   const auth = useAuth();
 
-  useEffect(()=> {
-    async function fetchPosts() {
-     const response = await getPosts();
-     if(response.success) {
-      setPosts(response.data.posts);
-     }
-      setLoading(false);
-    }
-    fetchPosts();
-  },[]);
-
+  
 
   if(loading) {
     return <Loader/>

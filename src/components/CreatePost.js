@@ -7,6 +7,7 @@ import { toastConfig } from '../utils';
 function CreatePost() {
   const [post, setPost] = useState('');
   const [addingPost, setAddingPost] = useState(false);
+  
 
   
 
@@ -15,11 +16,10 @@ function CreatePost() {
     const response = await createPost(post);
     if(response.success) {
         setPost('');
-        return toast.success('Post created successfully!', toastConfig);
+         toast.success('Post created successfully!', toastConfig);
     }else {
-        return toast.error(response.message, toastConfig);
+         toast.error(response.message, toastConfig);
     }
-
     setAddingPost(false);
   }
 

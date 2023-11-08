@@ -51,10 +51,12 @@ function UserProfile() {
       const {friendship} = response.data;
       auth.updateUserFriend(true, friendship);
       setRequestInProgress(false);
-      return toast.success('Friend added successfull', toastConfig);
+      toast.success('Friend added successfull', toastConfig);
     }else {
-      return toast.error(response.message, toastConfig);
+       toast.error(response.message, toastConfig);
     }
+
+    setRequestInProgress(false);
     
   }
 
@@ -64,11 +66,12 @@ function UserProfile() {
      if(response.success) {
       const friedship = auth.user.friends.filter((friend)=> friend.to_user._id == userId);
       auth.updateUserFriend(false, friedship[0]);
-      setRequestInProgress(false);
-     return  toast.success('Friend removed successfull', toastConfig);
+      
+     toast.success('Friend removed successfull', toastConfig);
      }else {
       toast.error(response.message, toastConfig);
      }
+     setRequestInProgress(false);
     
   }
 

@@ -5,12 +5,15 @@ import { App } from './components';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from './context/authContext';
+import PostsProvider from './context/postContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
+      <PostsProvider>
       <App />
+      </PostsProvider>
     </AuthProvider>
     <ToastContainer
       position="top-right"
