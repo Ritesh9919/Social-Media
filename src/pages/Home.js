@@ -6,7 +6,7 @@ import Comment from '../components/Comment';
 import { Loader } from '../components/Loader';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useProvideAuth';
-import { FriendsList } from '../components';
+import { FriendsList, CreatePost } from '../components';
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -32,6 +32,7 @@ function Home() {
   return (
     <div className={styles.home}>
     <div className={styles.postsList}>
+    <CreatePost/>
       {posts.map((post) => {
         return (
           <div className={styles.postWrapper} key={`Post-${post._id}`}>

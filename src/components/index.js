@@ -3,7 +3,8 @@ import { Loader } from './Loader';
 import Navbar from './Navbar';
 import Comment from './Comment';
 import FriendsList from './FriendList';
+import CreatePost from './CreatePost';
 
 export {
-  App, Loader,Navbar,Comment, FriendsList
+  App, Loader,Navbar,Comment, FriendsList, CreatePost
 }
