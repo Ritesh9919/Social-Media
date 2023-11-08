@@ -1,20 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/home.module.css';
-import { func } from 'prop-types';
+import { createPost } from '../api';
+import { toast } from 'react-toastify';
+import { toastConfig } from '../utils';
 
 function CreatePost() {
-    const [post, setPost] = useState('');
-    const [addingPost, setAddingPost] = useState(false);
+  const [post, setPost] = useState('');
+  const [addingPost, setAddingPost] = useState(false);
 
-    function handleAddPostClick() {
+  
 
+  async function handleAddPostClick() {
+    setAddingPost(true);
+    const response = await createPost(post);
+    if(response.success) {
+        setPost('');
+        return toast.success('Post created successfully!', toastConfig);
+    }else {
+        return toast.error(response.message, toastConfig);
     }
+
+    setAddingPost(false);
+  }
 
   return (
     <div className={styles.createPost}>
-      <textarea className={styles.addPost} value={post} onChange={(e)=> setPost(e.target.value)}></textarea>
+      <textarea
+        className={styles.addPost}
+        value={post}
+        onChange={(e) => setPost(e.target.value)}
+      ></textarea>
       <div>
-        <button className={styles.addPostBtn} onClick={handleAddPostClick} disabled={addingPost}>{addingPost ? "Adding Pos...":"Add Post"}</button>
+        <button
+          className={styles.addPostBtn}
+          onClick={handleAddPostClick}
+          disabled={addingPost}
+        >
+          {addingPost ? 'Adding Pos...' : 'Add Post'}
+        </button>
       </div>
     </div>
   );
