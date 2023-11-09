@@ -1,15 +1,18 @@
 import styles from '../styles/home.module.css';
 import { useAuth } from '../hooks/useProvideAuth';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function FriendsList() {
   const auth = useAuth();
-  const { friends = [] } = auth.user;
-  console.log("****f", friends);
+  const {friends = [] } = auth.user;
+  
+
+  
   return (
     <div className={styles.friendsList}>
       <div className={styles.header}>Friends</div>
-      {friends && friends.length == 0 && (
+      {friends && friends.length === 0 && (
         <div className={styles.noFriends}>No friend found</div>
       )}
       {friends &&
