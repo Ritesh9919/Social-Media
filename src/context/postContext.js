@@ -15,7 +15,7 @@ export const postsContext = createContext(initialState);
 const PostsProvider = ({children}) => {
     const posts = useProvidePosts();
     return (
-        <postsContext.Provider value={{posts}}>
+        <postsContext.Provider value={posts}>
           {children}
         </postsContext.Provider>
     )

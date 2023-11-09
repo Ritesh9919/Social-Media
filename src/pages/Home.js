@@ -8,13 +8,12 @@ import { FriendsList, CreatePost } from '../components';
 import { usePosts } from '../hooks/useProvidePost';
 
 function Home() {
-  const post = usePosts();
-  const {posts, loading} = post.posts;
+  const posts = usePosts();
   const auth = useAuth();
 
   
 
-  if(loading) {
+  if(posts.loading) {
     return <Loader/>
   }
 
@@ -22,7 +21,7 @@ function Home() {
     <div className={styles.home}>
     <div className={styles.postsList}>
     <CreatePost/>
-      {posts.map((post) => {
+      {posts.data.map((post) => {
         return (
           <div className={styles.postWrapper} key={`Post-${post._id}`}>
             <div className={styles.postHeader}>
@@ -32,7 +31,7 @@ function Home() {
                   alt="user-pic"
                 />
                 <div>
-                  <Link to={`/user/${post.user._id}`} state={{user:post.user}} className={styles.postAuthor}>{post.user.name}</Link>
+                  <Link to={`/user/${post.user._id}`}  className={styles.postAuthor}>{post.user.name}</Link>
                   <span className={styles.postTime}>a minute ago</span>
                 </div>
               </div>

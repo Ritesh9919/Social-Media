@@ -3,10 +3,14 @@ import styles from '../styles/home.module.css';
 import { createPost } from '../api';
 import { toast } from 'react-toastify';
 import { toastConfig } from '../utils';
+import { usePosts } from '../hooks/useProvidePost';
 
 function CreatePost() {
   const [post, setPost] = useState('');
   const [addingPost, setAddingPost] = useState(false);
+  const posts = usePosts();
+  
+  
   
 
   
@@ -16,6 +20,7 @@ function CreatePost() {
     const response = await createPost(post);
     if(response.success) {
         setPost('');
+        posts.addPostToState(response.data.post);
          toast.success('Post created successfully!', toastConfig);
     }else {
          toast.error(response.message, toastConfig);
